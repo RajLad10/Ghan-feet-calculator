@@ -44,7 +44,7 @@ const convertToCentimeters = (value, fromUnit) => {
 };
 
 const calculateGhanFoot = (length, circumference, lengthUnit, circumferenceUnit, returnIndividual = false) => {
-  if (!length || !circumference) return returnIndividual ? { individual: 0, final: 0 } : '0.00';
+  if (!length || !circumference) return returnIndividual ? { individual: 0, final: 0 } : 0;
   
   const lengthInMeters = convertToMeters(parseFloat(length) || 0, lengthUnit);
   const circumferenceInCentimeters = convertToCentimeters(parseFloat(circumference) || 0, circumferenceUnit);
@@ -60,12 +60,12 @@ const calculateGhanFoot = (length, circumference, lengthUnit, circumferenceUnit,
     };
   }
   
-  return ghanFootNew.toFixed(4);
+  return ghanFootNew;
 };
 
 // Function to calculate total volume from all logs
 const calculateTotalVolume = (logs) => {
-  if (!logs.length) return '0.00';
+  if (!logs.length) return 0;
   
   const totalGhanFootNew = logs.reduce((sum, log) => {
     if (!log.length || !log.circumference) return sum;
@@ -80,7 +80,7 @@ const calculateTotalVolume = (logs) => {
   }, 0);
   
   // Multiply the sum by 35.315 to get the final total
-  return (totalGhanFootNew * 35.315).toFixed(2);
+  return totalGhanFootNew * 35.315;
 };
 
 const LogInput = ({ log, index, onUpdate, onRemove }) => {
@@ -171,9 +171,9 @@ const LogInput = ({ log, index, onUpdate, onRemove }) => {
         <div className="result-group">
           <label>Volume <span className="gujarati">(ઘનમીટર)</span></label>
           <div className="result-box">
-            {individual ? individual.toFixed(2) : '0.00'} m³
+            {individual} m³
             {/* <div className="volume-final">
-              ({final ? final.toFixed(2) : '0.00'} ft³)
+              ({final} ft³)
             </div> */}
           </div>
         </div>
