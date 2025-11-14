@@ -331,6 +331,7 @@ h1 {
 .total-display {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   font-size: 1.1rem;
   font-weight: 700;
